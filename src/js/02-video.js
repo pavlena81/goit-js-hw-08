@@ -20,10 +20,10 @@
 //  обновлялось в хранилище не чаще чем раз в секунду.
 // setItem(key, value) - делает новую, или обновляет уже существующую запись в хранилище.
 
-    // import Vimeo from '@vimeo/player';
+    import Vimeo from '@vimeo/player';
     const iframe = document.querySelector('iframe');
     
-    const player = new Vimeo.Player(iframe);
+    const player = new Vimeo(iframe);
 
     player.on('play', function() {
         console.log('played the video!');
