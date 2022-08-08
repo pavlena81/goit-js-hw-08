@@ -24,22 +24,32 @@
     const iframe = document.querySelector('iframe');
     
     const player = new Vimeo(iframe);
-
-    player.on('play', function() {
+ 
+     player.on('timeupdate', function (event) {
+        localStorage.setItem("videoplayer-current-time", event.seconds);
+         
         console.log('played the video!');
     });
+    
+    //  player.on('play', function() {
+    //     console.log('played the video!');
+    // });
 
-    player.getVideoTitle().then(function(title) {
-        console.log('title:', title);
-    });
+           
+    player.setCurrentTime(localStorage.getItem("videoplayer-current-time"))
+    .then(function () {
+		return player;
+	});
 
 
-
-
-// player.addEventListener('timeupdate', (event) => {
+//     player.addEventListener('timeupdate', (event) => {
+   
 //   console.log('The currentTime attribute has been updated. Again.');
-// });
+//     });
+    
+   
 
-// localStorage.setItem("videoplayer-current-time", "value")
 
+    
 
+     
