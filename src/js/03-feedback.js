@@ -16,49 +16,57 @@ import throttle from "lodash.throttle";
 
 const STORAGE_KEY = 'feedback-form-state';
 
-const inputEl = document.querySelector('input');
+const formEl = document.querySelector('.feedback-form');
 
-const textAreaEl = document.querySelector('textarea');
+// contentTextArea();
 
-const formEl = document.querySelector('form');
 
-contentTextArea();
 
-let form = {};
+     formEl.addEventListener('input', throttle(onTextAreaInput, 500));
 
-    // inputEl.addEventListener('input', onEmailInput);
-
-textAreaEl.addEventListener('input', onTextAreaInput);
-// textAreaEl.addEventListener('input', throttle(onTextAreaInput, 500));
-
-// function onEmailInput(evt) {
+     formEl.addEventListener('submit', onFormSubmit);
+    // formEl.addEventListener('input', onTextAreaInput);
+    let formData = {};
         
-// };
+    function onTextAreaInput(event) {
+    // formData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
-formEl.addEventListener('submit', onFormSubmit);
+    // form = event.currentTarget.value;
+     formData[event.target.name] = event.target.value;
+    // localStorage.setItem(STORAGE_KEY, form);
 
-function onFormSubmit(event) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+};
+
+
+    function onFormSubmit(event) {
     event.preventDefault();
 
     console.log('send form');
     event.currentTarget.reset();
 
-    localStorage.removeItem(STORAGE_KEY);
+     localStorage.removeItem(STORAGE_KEY);   
+ 
 };
 
-function onTextAreaInput(event) {
-    form = event.currentTarget.value;
-    // form[event.currentTarget.name] = event.currentTarget.value;
-    localStorage.setItem(STORAGE_KEY, form);
+(function updateDataFromLocalStorage() {
+  let savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify('form'));
-};
+  if (savedData) {
+    Object.entries(savedData).forEach(([key, value]) => {
+      formData[key] = value;
+      formEl.elements[key].value = value;
+      //console.log(data);
+    });
+  }
+})();
 
-function contentTextArea() {
-    const savedContent = localStorage.getItem(STORAGE_KEY);
-    if (savedContent) {
-        console.log(savedContent);
-        textAreaEl.value = savedContent;
-    }
-}
+// function contentTextArea() {
+//     const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
+//     if (savedData) {
+//         console.log('savedData');
+//     }
+//     formEl.email.value = savedData.email || '';
+//     formEl.message.value = savedData.message || '';
+// }
