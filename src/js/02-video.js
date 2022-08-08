@@ -20,6 +20,8 @@
 //  обновлялось в хранилище не чаще чем раз в секунду.
 // setItem(key, value) - делает новую, или обновляет уже существующую запись в хранилище.
 
+    import throttle from 'lodash.throttle';
+
     import Vimeo from '@vimeo/player';
     const iframe = document.querySelector('iframe');
     
@@ -42,6 +44,13 @@
 	});
 
 
+
+      document.addEventListener(
+      player,
+      throttle(() => {
+        console.log("Scroll handler call every 1000ms");
+      }, 1000)
+    );
 //     player.addEventListener('timeupdate', (event) => {
    
 //   console.log('The currentTime attribute has been updated. Again.');
