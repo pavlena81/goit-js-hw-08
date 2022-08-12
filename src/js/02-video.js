@@ -36,12 +36,14 @@
     //  player.on('play', function() {
     //     console.log('played the video!');
     // });
+    let onCurrentTime = 0;
+    const currentTime = localStorage.getItem("videoplayer-current-time");
+    player.setCurrentTime(currentTime)
+    .then(function (onCurrentTime) {
+      // return player;
+          return onCurrentTime === null ? undefined : onCurrentTime === JSON.parse(currentTime);
 
-           
-    player.setCurrentTime(localStorage.getItem("videoplayer-current-time"))
-    .then(function () {
-		return player;
-	});
+    });
 
 
 
@@ -55,8 +57,7 @@
    
 //   console.log('The currentTime attribute has been updated. Again.');
 //     });
-    
-   
+
 
 
     
