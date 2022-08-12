@@ -33,20 +33,26 @@ const formEl = document.querySelector('.feedback-form');
 
     // form = event.currentTarget.value;
      formData[event.target.name] = event.target.value;
-    // localStorage.setItem(STORAGE_KEY, form);
+    
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 };
 
 
     function onFormSubmit(event) {
-    event.preventDefault();
+      event.preventDefault();
+      
+      
+      if (formEl.email.value === '' || formEl.message.value === '') {
+        alert('все поля должны быть заполнены')
+      }
 
-    console.log('send form');
+    console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+
     event.currentTarget.reset();
 
-     localStorage.removeItem(STORAGE_KEY);   
- 
+      localStorage.removeItem(STORAGE_KEY); 
+     
 };
 
 (function updateDataFromLocalStorage() {
@@ -56,17 +62,8 @@ const formEl = document.querySelector('.feedback-form');
     Object.entries(savedData).forEach(([key, value]) => {
       formData[key] = value;
       formEl.elements[key].value = value;
-      //console.log(data);
+    
     });
   }
 })();
 
-// function contentTextArea() {
-//     const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-//     if (savedData) {
-//         console.log('savedData');
-//     }
-//     formEl.email.value = savedData.email || '';
-//     formEl.message.value = savedData.message || '';
-// }
