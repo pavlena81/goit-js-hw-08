@@ -36,15 +36,20 @@
     //  player.on('play', function() {
     //     console.log('played the video!');
     // });
-    let onCurrentTime = 0;
+     let onCurrentTime = 0;
     const currentTime = localStorage.getItem("videoplayer-current-time");
-    player.setCurrentTime(currentTime)
+    player.setCurrentTime(onCurrentTime)
     .then(function (onCurrentTime) {
-      // return player;
-          return onCurrentTime === null ? undefined : onCurrentTime === JSON.parse(currentTime);
+      
+          return onCurrentTime === 0 ? undefined : onCurrentTime === JSON.parse(currentTime);
 
     });
 
+    // ================
+//     if (currentTime) {
+//       player.setCurrentTime(currentTime)
+// };
+// =====================================
 
 
       document.addEventListener(
@@ -58,6 +63,22 @@
 //   console.log('The currentTime attribute has been updated. Again.');
 //     });
 
+
+// .then(function (seconds) {
+// //   // seconds = the actual time that the player seeked to
+// //   console.log(seconds);
+// // })
+// // .catch(function (error) {
+// //   switch (error.name) {
+// //     case 'RangeError':
+// //       // the time was less than 0 or greater than the video’s duration
+// //       break;
+
+// //     default:
+// //       // some other error occurred
+// //       break;
+// //   }
+// // });
 
 
     
