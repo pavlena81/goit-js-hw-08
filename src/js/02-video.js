@@ -36,12 +36,13 @@
     //  player.on('play', function() {
     //     console.log('played the video!');
     // });
-     let onCurrentTime = 0;
+    
     const currentTime = localStorage.getItem("videoplayer-current-time");
+    let onCurrentTime = JSON.parse(currentTime);
     player.setCurrentTime(onCurrentTime)
-    .then(function (onCurrentTime) {
+    .then(function (currentTime) {
       
-          return onCurrentTime === 0 ? undefined : onCurrentTime === JSON.parse(currentTime);
+          return onCurrentTime === null ? undefined : onCurrentTime;
 
     });
 
