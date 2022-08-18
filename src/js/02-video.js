@@ -23,8 +23,10 @@
     import throttle from 'lodash.throttle';
 
     import Vimeo from '@vimeo/player';
-    const iframe = document.querySelector('iframe');
     
+    
+    const iframe = document.querySelector('iframe');
+
     const player = new Vimeo(iframe);
  
      player.on('timeupdate', function (event) {
@@ -33,25 +35,25 @@
         console.log('played the video!');
     });
     
-    //  player.on('play', function() {
-    //     console.log('played the video!');
-    // });
-    
+        
     const currentTime = localStorage.getItem("videoplayer-current-time");
     let onCurrentTime = JSON.parse(currentTime);
+//      if (onCurrentTime) {
+//        player.setCurrentTime(onCurrentTime)
+//      } else {
+//        onCurrentTime = 0;
+//  };
+ 
     player.setCurrentTime(onCurrentTime)
-    .then(function (currentTime) {
-      
-          return onCurrentTime === null ? undefined : onCurrentTime;
+    .then(function (){
+      if (onCurrentTime) {
+       player.setCurrentTime(onCurrentTime)
+     } else {
+       onCurrentTime = 0;
+ };
+          // return onCurrentTime === null ? undefined : onCurrentTime;
 
     });
-
-    // ================
-//     if (currentTime) {
-//       player.setCurrentTime(currentTime)
-// };
-// =====================================
-
 
       document.addEventListener(
       player,
