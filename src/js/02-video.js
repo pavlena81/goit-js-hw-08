@@ -38,22 +38,17 @@
         
     const currentTime = localStorage.getItem("videoplayer-current-time");
     let onCurrentTime = JSON.parse(currentTime);
-//      if (onCurrentTime) {
-//        player.setCurrentTime(onCurrentTime)
-//      } else {
-//        onCurrentTime = 0;
-//  };
- 
-    player.setCurrentTime(onCurrentTime)
-    .then(function (){
-      if (onCurrentTime) {
+     if (onCurrentTime) {
        player.setCurrentTime(onCurrentTime)
      } else {
        onCurrentTime = 0;
  };
+ 
+    player.setCurrentTime(onCurrentTime);
+     
           // return onCurrentTime === null ? undefined : onCurrentTime;
 
-    });
+   
 
       document.addEventListener(
       player,
